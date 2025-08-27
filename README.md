@@ -4,7 +4,7 @@
 This project analyzes the sales performance of **KMS**, a retail company, using SQL queries to extract insights on customers, products, revenue, and shipping efficiency. The goal is to answer critical business questions and provide data-driven recommendations to improve profitability and operational efficiency.
 ---
 
-##  Business Questions Answered
+###  Business Questions Answered
 1. Which product category had the highest sales?
 2. What are the top and bottom 3 regions by total sales?
 3. What were the total sales of appliances in Ontario?
@@ -18,29 +18,32 @@ This project analyzes the sales performance of **KMS**, a retail company, using 
 11. Did the company spend shipping costs appropriately based on order priority?
 ---
 
-# Tools I Used
+### Tools I Used
 To explore the retail company, I relied on a set of powerful tools:
 - **SQL** – The foundation of my analysis, enabling me to query databases and extract meaningful insights.
 - **Python** – using Seaborn for visualisation.
 - **GitHub** – Essential for version control, collaboration, and tracking the progress of my SQL scripts and analysis.
 ---
 
-£#  The Analysis
+###  The Analysis
 Each query in this project was crafted to answer a specific business question for the KMS retail company. Below is an overview of how I approached each question and the corresponding SQL logic.
 
-##£ 1. Top Product Category: I started by looking at all product categories to see which one contributed the most to revenue. Technology stood out as top, showing where the company’s strength lies.
+### 1. Top Product Category: 
+I started by looking at all product categories to see which one contributed the most to revenue. Technology stood out as top, showing where the company’s strength lies.
 ```sql
 SSELECT TOP 1 Product_Category, SUM(Sales) AS TotalSales
 FROM KMS
 GROUP BY Product_Category
 ORDER BY TotalSales DESC
 ```
-- **Action:** Increase inventory and marketing budget for Technology products.
+Recommendation:
+Focus marketing and promotional campaigns on Technology products to maximize revenue.
 
 ![Top Paying Roles'](assets/1_top_paying_roles_.png)
 *Bar graph visualizing the salary for the top 10 salaries for data analysts*
 
-### 2. Top 3 and Bottom 3 Regions by Sales:  I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
+### 2. Top 3 and Bottom 3 Regions by Sales: 
+I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
 ```sql
 SELECT region, total_sales, 'Top' AS category
 FROM (
@@ -59,72 +62,119 @@ FROM (
 ) AS bottom_regions
 ORDER BY category, total_sales DESC;
 ```
-- **Action:** Increase inventory and marketing budget for Technology products.
+Recommendation:
+Introduce targeted campaigns and better distribution strategies in underperforming regions.
 
 ![Top Paying Roles'](assets/1_top_paying_roles_.png)
 *Bar graph visualizing the salary for the top 10 salaries for data analysts*
 
 
 
--- 3. Total sales of appliances in Ontario: Zooming into Ontario, I checked how appliances performed. This helped me understand regional demand for specific product lines.
+### 3. Total sales of appliances in Ontario: 
+Zooming into Ontario, I checked how appliances performed. This helped me understand regional demand for specific product lines.
+```sql
 SELECT Product_Sub_Category, SUM(Sales) AS TotalSales
 FROM KMS
 WHERE Province = 'Ontario'
 GROUP BY Product_Sub_Category;
+```
+Recommendation:
+Boost sales with regional promotions or bundle offers on appliances.
 
--- 4. Bottom 10 customers by revenue: I then focused on the least profitable customers. These are clients who need attention—perhaps through loyalty programs, discounts, or personalized offers to boost their engagement.
+### 4. Bottom 10 customers by revenue:
+I then focused on the least profitable customers. These are clients who need attention—perhaps through loyalty programs, discounts, or personalized offers to boost their engagement.
+```sql
 SELECT TOP 10 Customer_Name, SUM(Sales) AS Revenue
 FROM KMS
 GROUP BY Customer_Name
 ORDER BY Revenue ASC;
+```
+Recommendation:
+Engage these customers with personalized discounts or loyalty programs to increase spending.
 
--- 5. Shipping method with the highest cost: Shipping costs can eat into profits, so I analyzed the shipping modes. Express Air turned out to be the most expensive, raising questions about whether it’s being used efficiently.
+### 5. Shipping method with the highest cost: 
+Shipping costs can eat into profits, so I analyzed the shipping modes. Express Air turned out to be the most expensive, raising questions about whether it’s being used efficiently.
+```sql
 SELECT TOP 1 Ship_Mode, SUM(Shipping_Cost) AS TotalShippingCost
 FROM KMS
 GROUP BY Ship_Mode
 ORDER BY TotalShippingCost DESC;
+```
+Recommendation:
+Use Express Air only for critical orders; consider switching to economical options for low-priority deliveries.
 
--- 6. Most valuable customers and products purchased: High-value customers drive growth, so I identified them and examined their favorite products. Knowing what they buy most often helps in creating personalized promotions.
+### 6. Most valuable customers and products purchased:
+High-value customers drive growth, so I identified them and examined their favorite products. Knowing what they buy most often helps in creating personalized promotions.
+```sql
 SELECT TOP 10 Customer_Name, Product_Name, SUM(Sales) AS TotalSales, SUM(Profit) AS TotalProfit
 FROM KMS
 GROUP BY Customer_Name, Product_Name
-ORDER BY TotalSales DESC;
+ORDER BY TotalSales DESC
+```
+Recommendation:
+Offer loyalty rewards, early access to new products, and exclusive deals to retain these customers.
 
--- 7. Small business customer with highest sales: Among small business clients, I found the top spender. This insight is useful for building strong partnerships and offering tailored deals.
+### 7. Small business customer with highest sales:
+Among small business clients, I found the top spender. This insight is useful for building strong partnerships and offering tailored deals.
+```sql
 SELECT TOP 1 Customer_Name, SUM(Sales) AS TotalSales
 FROM KMS
 WHERE Customer_Segment = 'Small Business'
 GROUP BY Customer_Name
 ORDER BY TotalSales DESC;
+```
+Recommendation:
+Build partnerships and offer volume-based discounts for small business clients.
 
--- 8. Corporate customer with most orders between 2009 and 2012: For corporate clients, I wanted to see who had been the most consistent over time. One customer stood out with frequent orders during this period, showing loyalty that can be nurtured further.
+### 8. Corporate customer with most orders between 2009 and 2012:
+For corporate clients, I wanted to see who had been the most consistent over time. One customer stood out with frequent orders during this period, showing loyalty that can be nurtured further.
+```sql
 SELECT TOP 1 Customer_Name, COUNT(Order_ID) AS TotalOrders
 FROM KMS
 WHERE Customer_Segment = 'Corporate'
 AND YEAR(Order_Date) BETWEEN 2009 AND 2012
 GROUP BY Customer_Name
 ORDER BY TotalOrders DESC;
+```
+Recommendation:
+Create a tailored corporate plan or retention package to maintain long-term engagement.
 
--- 9. Most profitable consumer customer: For corporate clients, I wanted to see who had been the most consistent over time. One customer stood out with frequent orders during this period, showing loyalty that can be nurtured further.
+### 9. Most profitable consumer customer: 
+For corporate clients, I wanted to see who had been the most consistent over time. One customer stood out with frequent orders during this period, showing loyalty that can be nurtured further.
+```sql
 SELECT TOP 1 Customer_Name, SUM(Profit) AS TotalProfit
 FROM KMS
 WHERE Customer_Segment = 'Consumer'
 GROUP BY Customer_Name
 ORDER BY TotalProfit DESC;
+```
+Recommendation:
+Introduce VIP benefits and personalized offers to maintain their loyalty.
 
--- 10. Customers who returned items and their segments: Returns can reduce margins, so I looked at customers who return products often. Understanding their segments helps in managing expectations and improving satisfaction.
+### 10. Customers who returned items and their segments: 
+Returns can reduce margins, so I looked at customers who return products often. Understanding their segments helps in managing expectations and improving satisfaction.
+```sql
 SELECT k.Customer_Name, k.Customer_Segment, s.Status, COUNT(s.Order_ID) AS No_of_Returns
 FROM KMS k
 JOIN OrderStatus s ON k.Order_ID = s.Order_ID
 GROUP BY k.Customer_Name, k.Customer_Segment, s.Status
 ORDER BY COUNT(s.Order_ID) DESC;
+```
+Insight:
+Customers across all segments returned items, with some patterns of frequent returns.
+Recommendation:
+Review product quality and implement stricter return policies for high-return customers.
 
--- 11. Shipping cost analysis based on order priority: Finally, I checked if shipping matched order urgency. Surprisingly, critical orders often went by slower delivery methods, while low-priority orders used costly Express Air. This highlighted an area for operational improvement.
+### 11. Shipping cost analysis based on order priority:
+Finally, I checked if shipping matched order urgency. Surprisingly, critical orders often went by slower delivery methods, while low-priority orders used costly Express Air. This highlighted an area for operational improvement.
+```sql
 SELECT Ship_Mode, Order_Priority, SUM(Shipping_Cost) AS TotalShippingCost, COUNT(Order_ID) AS No_of_Orders
 FROM KMS
 GROUP BY Ship_Mode, Order_Priority
 ORDER BY TotalShippingCost DESC;
-
+```
+Recommendation:
+Align shipping method with order priority to reduce cost and improve delivery efficiency.
 
 ##  Key Insights
 - **Top Product Category:** Technology had the highest total sales.
