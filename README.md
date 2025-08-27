@@ -37,11 +37,12 @@ FROM KMS
 GROUP BY Product_Category
 ORDER BY TotalSales DESC
 ```
+<img width="445" height="343" alt="Screenshot 2025-08-28 001432" src="https://github.com/user-attachments/assets/b20ca8b3-b1c9-4c58-87d5-604b41553731" />
+*Bar graph visualizing the salary for the top 10 salaries for data analysts*
 Recommendation:
 Focus marketing and promotional campaigns on Technology products to maximize revenue.
 
-![Top Paying Roles'](assets/1_top_paying_roles_.png)
-*Bar graph visualizing the salary for the top 10 salaries for data analysts*
+
 
 ### 2. Top 3 and Bottom 3 Regions by Sales: 
 I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
