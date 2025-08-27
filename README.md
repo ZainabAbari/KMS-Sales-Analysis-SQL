@@ -1,7 +1,7 @@
 #  KMS Sales Analysis
 
 ## Introduction
-This project analyzes the sales performance of **KMS**, a retail company, using **SQL queries** to extract insights on customers, products, revenue, and shipping efficiency. The goal is to answer critical business questions and provide **data-driven recommendations** to improve profitability and operational efficiency.
+This project analyzes the sales performance of **KMS**, a retail company, using SQL queries to extract insights on customers, products, revenue, and shipping efficiency. The goal is to answer critical business questions and provide data-driven recommendations to improve profitability and operational efficiency.
 ---
 
 ##  Business Questions Answered
@@ -28,18 +28,102 @@ To explore the retail company, I relied on a set of powerful tools:
 #  The Analysis
 Each query in this project was crafted to answer a specific business question for the KMS retail company. Below is an overview of how I approached each question and the corresponding SQL logic.
 
-## 1. Top Product Category
+## 1. Top Product Category: I started by looking at all product categories to see which one contributed the most to revenue. Technology stood out as top, showing where the company’s strength lies.
 ```sql
 SSELECT TOP 1 Product_Category, SUM(Sales) AS TotalSales
 FROM KMS
 GROUP BY Product_Category
 ORDER BY TotalSales DESC
 ```
-- **Category:** Technology
 - **Action:** Increase inventory and marketing budget for Technology products.
 
+![Top Paying Roles'](assets/1_top_paying_roles_.png)
+*Bar graph visualizing the salary for the top 10 salaries for data analysts*
+
+## 2. Top 3 and Bottom 3 Regions by Sales:  I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
+```sql
+SELECT region, total_sales, 'Top' AS category
+FROM (
+    SELECT TOP 3 region, SUM(sales) AS total_sales
+    FROM KMS
+    GROUP BY region
+    ORDER BY SUM(sales) DESC
+) AS top_regions
+UNION ALL
+SELECT region, total_sales, 'Bottom' AS category
+FROM (
+    SELECT TOP 3 region, SUM(sales) AS total_sales
+    FROM KMS
+    GROUP BY region
+    ORDER BY SUM(sales) ASC
+) AS bottom_regions
+ORDER BY category, total_sales DESC;
+```
+- **Action:** Increase inventory and marketing budget for Technology products.
+
+![Top Paying Roles'](assets/1_top_paying_roles_.png)
+*Bar graph visualizing the salary for the top 10 salaries for data analysts*
 
 
+
+-- 3. Total sales of appliances in Ontario: Zooming into Ontario, I checked how appliances performed. This helped me understand regional demand for specific product lines.
+SELECT Product_Sub_Category, SUM(Sales) AS TotalSales
+FROM KMS
+WHERE Province = 'Ontario'
+GROUP BY Product_Sub_Category;
+
+-- 4. Bottom 10 customers by revenue: I then focused on the least profitable customers. These are clients who need attention—perhaps through loyalty programs, discounts, or personalized offers to boost their engagement.
+SELECT TOP 10 Customer_Name, SUM(Sales) AS Revenue
+FROM KMS
+GROUP BY Customer_Name
+ORDER BY Revenue ASC;
+
+-- 5. Shipping method with the highest cost: Shipping costs can eat into profits, so I analyzed the shipping modes. Express Air turned out to be the most expensive, raising questions about whether it’s being used efficiently.
+SELECT TOP 1 Ship_Mode, SUM(Shipping_Cost) AS TotalShippingCost
+FROM KMS
+GROUP BY Ship_Mode
+ORDER BY TotalShippingCost DESC;
+
+-- 6. Most valuable customers and products purchased: High-value customers drive growth, so I identified them and examined their favorite products. Knowing what they buy most often helps in creating personalized promotions.
+SELECT TOP 10 Customer_Name, Product_Name, SUM(Sales) AS TotalSales, SUM(Profit) AS TotalProfit
+FROM KMS
+GROUP BY Customer_Name, Product_Name
+ORDER BY TotalSales DESC;
+
+-- 7. Small business customer with highest sales
+SELECT TOP 1 Customer_Name, SUM(Sales) AS TotalSales
+FROM KMS
+WHERE Customer_Segment = 'Small Business'
+GROUP BY Customer_Name
+ORDER BY TotalSales DESC;
+
+-- 8. Corporate customer with most orders between 2009 and 2012
+SELECT TOP 1 Customer_Name, COUNT(Order_ID) AS TotalOrders
+FROM KMS
+WHERE Customer_Segment = 'Corporate'
+AND YEAR(Order_Date) BETWEEN 2009 AND 2012
+GROUP BY Customer_Name
+ORDER BY TotalOrders DESC;
+
+-- 9. Most profitable consumer customer
+SELECT TOP 1 Customer_Name, SUM(Profit) AS TotalProfit
+FROM KMS
+WHERE Customer_Segment = 'Consumer'
+GROUP BY Customer_Name
+ORDER BY TotalProfit DESC;
+
+-- 10. Customers who returned items and their segments
+SELECT k.Customer_Name, k.Customer_Segment, s.Status, COUNT(s.Order_ID) AS No_of_Returns
+FROM KMS k
+JOIN OrderStatus s ON k.Order_ID = s.Order_ID
+GROUP BY k.Customer_Name, k.Customer_Segment, s.Status
+ORDER BY COUNT(s.Order_ID) DESC;
+
+-- 11. Shipping cost analysis based on order priority
+SELECT Ship_Mode, Order_Priority, SUM(Shipping_Cost) AS TotalShippingCost, COUNT(Order_ID) AS No_of_Orders
+FROM KMS
+GROUP BY Ship_Mode, Order_Priority
+ORDER BY TotalShippingCost DESC;
 
 
 ##  Key Insights
