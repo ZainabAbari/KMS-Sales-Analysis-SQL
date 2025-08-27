@@ -90,14 +90,14 @@ FROM KMS
 GROUP BY Customer_Name, Product_Name
 ORDER BY TotalSales DESC;
 
--- 7. Small business customer with highest sales
+-- 7. Small business customer with highest sales: Among small business clients, I found the top spender. This insight is useful for building strong partnerships and offering tailored deals.
 SELECT TOP 1 Customer_Name, SUM(Sales) AS TotalSales
 FROM KMS
 WHERE Customer_Segment = 'Small Business'
 GROUP BY Customer_Name
 ORDER BY TotalSales DESC;
 
--- 8. Corporate customer with most orders between 2009 and 2012
+-- 8. Corporate customer with most orders between 2009 and 2012: For corporate clients, I wanted to see who had been the most consistent over time. One customer stood out with frequent orders during this period, showing loyalty that can be nurtured further.
 SELECT TOP 1 Customer_Name, COUNT(Order_ID) AS TotalOrders
 FROM KMS
 WHERE Customer_Segment = 'Corporate'
@@ -105,21 +105,21 @@ AND YEAR(Order_Date) BETWEEN 2009 AND 2012
 GROUP BY Customer_Name
 ORDER BY TotalOrders DESC;
 
--- 9. Most profitable consumer customer
+-- 9. Most profitable consumer customer: For corporate clients, I wanted to see who had been the most consistent over time. One customer stood out with frequent orders during this period, showing loyalty that can be nurtured further.
 SELECT TOP 1 Customer_Name, SUM(Profit) AS TotalProfit
 FROM KMS
 WHERE Customer_Segment = 'Consumer'
 GROUP BY Customer_Name
 ORDER BY TotalProfit DESC;
 
--- 10. Customers who returned items and their segments
+-- 10. Customers who returned items and their segments: Returns can reduce margins, so I looked at customers who return products often. Understanding their segments helps in managing expectations and improving satisfaction.
 SELECT k.Customer_Name, k.Customer_Segment, s.Status, COUNT(s.Order_ID) AS No_of_Returns
 FROM KMS k
 JOIN OrderStatus s ON k.Order_ID = s.Order_ID
 GROUP BY k.Customer_Name, k.Customer_Segment, s.Status
 ORDER BY COUNT(s.Order_ID) DESC;
 
--- 11. Shipping cost analysis based on order priority
+-- 11. Shipping cost analysis based on order priority: Finally, I checked if shipping matched order urgency. Surprisingly, critical orders often went by slower delivery methods, while low-priority orders used costly Express Air. This highlighted an area for operational improvement.
 SELECT Ship_Mode, Order_Priority, SUM(Shipping_Cost) AS TotalShippingCost, COUNT(Order_ID) AS No_of_Orders
 FROM KMS
 GROUP BY Ship_Mode, Order_Priority
