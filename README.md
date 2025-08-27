@@ -1,6 +1,7 @@
 #  KMS Sales Analysis
 
 ## Introduction
+
 This project analyzes the sales performance of **KMS**, a retail company, using SQL queries to extract insights on customers, products, revenue, and shipping efficiency. The goal is to answer critical business questions and provide data-driven recommendations to improve profitability and operational efficiency.
 ---
 
