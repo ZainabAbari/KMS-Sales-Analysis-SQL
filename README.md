@@ -25,10 +25,10 @@ To explore the retail company, I relied on a set of powerful tools:
 - **GitHub** – Essential for version control, collaboration, and tracking the progress of my SQL scripts and analysis.
 ---
 
-#  The Analysis
+£#  The Analysis
 Each query in this project was crafted to answer a specific business question for the KMS retail company. Below is an overview of how I approached each question and the corresponding SQL logic.
 
-## 1. Top Product Category: I started by looking at all product categories to see which one contributed the most to revenue. Technology stood out as top, showing where the company’s strength lies.
+##£ 1. Top Product Category: I started by looking at all product categories to see which one contributed the most to revenue. Technology stood out as top, showing where the company’s strength lies.
 ```sql
 SSELECT TOP 1 Product_Category, SUM(Sales) AS TotalSales
 FROM KMS
@@ -40,7 +40,7 @@ ORDER BY TotalSales DESC
 ![Top Paying Roles'](assets/1_top_paying_roles_.png)
 *Bar graph visualizing the salary for the top 10 salaries for data analysts*
 
-## 2. Top 3 and Bottom 3 Regions by Sales:  I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
+### 2. Top 3 and Bottom 3 Regions by Sales:  I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
 ```sql
 SELECT region, total_sales, 'Top' AS category
 FROM (
