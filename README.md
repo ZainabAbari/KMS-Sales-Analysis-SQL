@@ -18,14 +18,12 @@ This project analyzes the sales performance of **KMS**, a retail company, using 
 10. Which customers returned items and their segments?
 11. Did the company spend shipping costs appropriately based on order priority?
 ---
-
 ### Tools I Used
 To explore the retail company, I relied on a set of powerful tools:
 - **SQL** – The foundation of my analysis, enabling me to query databases and extract meaningful insights.
 - **Python** – using Seaborn for visualisation.
 - **GitHub** – Essential for version control, collaboration, and tracking the progress of my SQL scripts and analysis.
 ---
-
 ###  The Analysis
 Each query in this project was crafted to answer a specific business question for the KMS retail company. Below is an overview of how I approached each question and the corresponding SQL logic.
 
@@ -76,7 +74,7 @@ WHERE Province = 'Ontario'
 GROUP BY Product_Sub_Category;
 ```
 <img width="235" height="204" alt="image" src="https://github.com/user-attachments/assets/9aed6b84-183e-41d5-9e04-ce40dab0a166" />
-*Bar graph visualizing Total sales of appliances in Ontario*
+*Pie Chart visualizing Total sales of appliances in Ontario*
 Recommendation:
 Boost sales with regional promotions or bundle offers on appliances.
 
@@ -88,8 +86,6 @@ FROM KMS
 GROUP BY Customer_Name
 ORDER BY Revenue ASC;
 ```
-<img width="299" height="220" alt="image" src="https://github.com/user-attachments/assets/b29d6cc2-4e5b-4eaf-a88d-010c5436bd33" />
-*Bar graph visualizing Bottom 10 customers by revenue*
 Recommendation:
 Engage these customers with personalized discounts or loyalty programs to increase spending.
 
@@ -101,8 +97,6 @@ FROM KMS
 GROUP BY Ship_Mode
 ORDER BY TotalShippingCost DESC;
 ```
-<img width="299" height="220" alt="image" src="https://github.com/user-attachments/assets/b29d6cc2-4e5b-4eaf-a88d-010c5436bd33" />
-*Bar graph visualizing Shipping method with the highest cost*
 Recommendation:
 Use Express Air only for critical orders; consider switching to economical options for low-priority deliveries.
 
@@ -163,6 +157,7 @@ JOIN OrderStatus s ON k.Order_ID = s.Order_ID
 GROUP BY k.Customer_Name, k.Customer_Segment, s.Status
 ORDER BY COUNT(s.Order_ID) DESC;
 ```
+<img width="287" height="223" alt="image" src="https://github.com/user-attachments/assets/34f0dc22-b7dd-4e69-8025-f53ac6c720cd" />
 Insight:
 Customers across all segments returned items, with some patterns of frequent returns.
 Recommendation:
@@ -176,16 +171,9 @@ FROM KMS
 GROUP BY Ship_Mode, Order_Priority
 ORDER BY TotalShippingCost DESC;
 ```
+<img width="295" height="218" alt="image" src="https://github.com/user-attachments/assets/805055c5-1960-4d42-a64e-7e558ff48912" />
 Recommendation:
 Align shipping method with order priority to reduce cost and improve delivery efficiency.
-
-##  Key Insights
-- **Top Product Category:** Technology had the highest total sales.
-- **Regional Performance:** East and West regions lead in revenue; Central region underperformed.
-- **Shipping Cost:** Express Air is the most expensive method but often used for low-priority orders.
-- **Customer Value:** High-value customers primarily buy Technology and Office Supplies.
-- **Returns Analysis:** Certain customers returned multiple items, impacting profit.
----
 
 ##  Recommendations
 - **Match shipping method to priority:** Use Express Air for high-priority orders only.  
@@ -193,15 +181,16 @@ Align shipping method with order priority to reduce cost and improve delivery ef
 - **Engage low-value customers:** Loyalty programs or bundle offers.  
 - **Focus on profitable categories:** Increase marketing for Technology and Office Supplies.  
 ---
-
-## ▶ How to Use
-- Open `KMS_SQL_Queries.sql` to view all queries.
+##  How to Use
+- Open `[KMS SQL.sql](https://github.com/user-attachments/files/22028931/KMS.SQL.sql)` to view all queries.
 - Run queries in any SQL environment (SQL Server, MySQL, PostgreSQL).
-- Check `Insights.md` for summarized findings and recommendations.
 ---
+##  Conclusion
+This project explored key business questions for the KMS retail dataset using SQL and Python visualizations. The analysis provided insights into sales performance, customer value, shipping cost efficiency, and return patterns.
 
-##  Optional Visualizations
-Dashboards and charts can be added in the `Visualizations/` folder using **Power BI, Tableau, or Python**.
----
+###  Future Work:
+- Build interactive dashboards (Power BI or Tableau) for real-time monitoring.
+- Incorporate predictive analytics to forecast sales trends.
+- Perform deeper customer segmentation for personalized recommendations.
 
-## 📁 Repository Structure
+Thank you for viewing this project! Feedback and suggestions are welcome. 
