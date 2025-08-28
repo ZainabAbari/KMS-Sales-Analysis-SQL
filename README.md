@@ -37,12 +37,10 @@ FROM KMS
 GROUP BY Product_Category
 ORDER BY TotalSales DESC
 ```
-<img width="445" height="343" alt="Screenshot 2025-08-28 001432" src="https://github.com/user-attachments/assets/b20ca8b3-b1c9-4c58-87d5-604b41553731" />
-*Bar graph visualizing the salary for the top 10 salaries for data analysts*
+<img width="295" height="228" alt="image" src="https://github.com/user-attachments/assets/947f36c1-2c29-4870-b020-7d0ca18d03d7" />
+*Bar graph visualizing Product Categories by Total sales*
 Recommendation:
 Focus marketing and promotional campaigns on Technology products to maximize revenue.
-
-
 
 ### 2. Top 3 and Bottom 3 Regions by Sales: 
 I compared regions to identify the strongest and weakest performers. The East and West regions dominated, while the Central region lagged behind, signaling an opportunity for targeted growth.
@@ -64,13 +62,10 @@ FROM (
 ) AS bottom_regions
 ORDER BY category, total_sales DESC;
 ```
+<img width="290" height="229" alt="image" src="https://github.com/user-attachments/assets/ea70aa67-34d2-4076-806b-ba90a0d7428f" />
+*Bar graph visualizing Top 3 and Bottom 3 Regions by Sales*
 Recommendation:
 Introduce targeted campaigns and better distribution strategies in underperforming regions.
-
-![Top Paying Roles'](assets/1_top_paying_roles_.png)
-*Bar graph visualizing the salary for the top 10 salaries for data analysts*
-
-
 
 ### 3. Total sales of appliances in Ontario: 
 Zooming into Ontario, I checked how appliances performed. This helped me understand regional demand for specific product lines.
@@ -80,6 +75,8 @@ FROM KMS
 WHERE Province = 'Ontario'
 GROUP BY Product_Sub_Category;
 ```
+<img width="235" height="204" alt="image" src="https://github.com/user-attachments/assets/9aed6b84-183e-41d5-9e04-ce40dab0a166" />
+*Bar graph visualizing Total sales of appliances in Ontario*
 Recommendation:
 Boost sales with regional promotions or bundle offers on appliances.
 
@@ -91,6 +88,8 @@ FROM KMS
 GROUP BY Customer_Name
 ORDER BY Revenue ASC;
 ```
+<img width="299" height="220" alt="image" src="https://github.com/user-attachments/assets/b29d6cc2-4e5b-4eaf-a88d-010c5436bd33" />
+*Bar graph visualizing Bottom 10 customers by revenue*
 Recommendation:
 Engage these customers with personalized discounts or loyalty programs to increase spending.
 
@@ -102,6 +101,8 @@ FROM KMS
 GROUP BY Ship_Mode
 ORDER BY TotalShippingCost DESC;
 ```
+<img width="299" height="220" alt="image" src="https://github.com/user-attachments/assets/b29d6cc2-4e5b-4eaf-a88d-010c5436bd33" />
+*Bar graph visualizing Shipping method with the highest cost*
 Recommendation:
 Use Express Air only for critical orders; consider switching to economical options for low-priority deliveries.
 
