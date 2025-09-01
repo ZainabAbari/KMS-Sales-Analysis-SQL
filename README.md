@@ -30,7 +30,7 @@ Each query in this project was crafted to answer a specific business question fo
 ### 1. Top Product Category: 
 I started by looking at all product categories to see which one contributed the most to revenue. Technology stood out as top, showing where the company’s strength lies.
 ```sql
-SSELECT TOP 1 Product_Category, SUM(Sales) AS TotalSales
+SELECT TOP 1 Product_Category, SUM(Sales) AS TotalSales
 FROM KMS
 GROUP BY Product_Category
 ORDER BY TotalSales DESC
